@@ -11,7 +11,7 @@ export const prepareData = () => dispatch => {
 }
 
 export const getLocalWeather = (zip) => dispatch => {
-  axios.get(`http://api.weatherapi.com/v1/current.json?key= 40b2b50c88aa4a44b9a10202202109&q=${zip}`)
+  axios.get(`https://api.weatherapi.com/v1/current.json?key= 40b2b50c88aa4a44b9a10202202109&q=${zip}`)
     .then(res => {
       dispatch({ type: DYNAMIC_WEATHER, payload: res.data.current})
       dispatch({ type: WEATHER_IMAGE, payload: res.data.current.condition})
