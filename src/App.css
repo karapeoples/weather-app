@@ -24,8 +24,14 @@
 }
 
 .weather-card{
-  background: red;
-  color: black;
+  background: #e452e9;
+  color: #76d5ec;
+  text-shadow: -1px 0 wheat, 0 1px wheat, 1px 0 wheat, 0 -1px wheat;
   width: 50%;
+  margin: 0 auto;
+}
+
+.weather-image-frame{
+  width: 75%;
   margin: 0 auto;
 }

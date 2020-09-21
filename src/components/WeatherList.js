@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getLocalWeather, prepareData } from '../redux/actions'
 import WeatherCard from './WeatherCard'
@@ -7,30 +7,24 @@ import WeatherCard from './WeatherCard'
 
 const WeatherList = () => {
   const data = useSelector((state) => state.isFetching)
-  const localWeather = useSelector(state => state.localWeather)
+  const weather = useSelector(state => state.localWeather)
+  const localInfo = useSelector(state => state.localInfo)
+  const image = useSelector(state => state.image)
   const dispatch = useDispatch()
   const [zip, setZip] = useState('')
   const [toggle, setToggle] = useState(false)
-  const [info, setInfo]=useState([])
 
-useEffect(() => {
-    dispatch(prepareData())
-    dispatch(getLocalWeather(zip))
-    setInfo(localWeather)
-// eslint-disable-next-line
-  },[dispatch])
 
   const handleSubmit = (e)  => {
     e.preventDefault()
     setToggle(true)
-    /* dispatch(getLocalWeather(zip)) */
-
+    dispatch(getLocalWeather(zip))
+    dispatch(prepareData())
 
   }
   const handleChange = e => {
    setZip(e.target.value)
   }
-
 
 
   return (
@@ -46,13 +40,10 @@ useEffect(() => {
       <section>
         {data  ? <div> **The INFO is Coming** </div>
             :
-          <section>
-            {info.map((local, index) => {
-              return
-              <WeatherCard key={index} temp={local.temp_f}/>
-          })
-              }
-            </section>
+            <section>
+              <br/>
+              <WeatherCard weather={weather} image={image} localInfo={localInfo}/>
+          </section>
       }
 
         </section>

@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { DYNAMIC_WEATHER, SET_ERROR, PREPARED_DATA } from './actions'
+import { DYNAMIC_WEATHER, SET_ERROR, PREPARED_DATA, WEATHER_IMAGE, WEATHER_INFO } from './actions'
 
 
 const initialState = {
   isFetching: false,
-  localWeather: [],
+	localWeather: [],
+	image: [],
+	localInfo: [],
   error: ''
 }
 
@@ -22,13 +24,25 @@ const reducer = (state = initialState, action) => {
 			case DYNAMIC_WEATHER:
 				return {
 					...state,
-          localWeather: action.payload,
-          isFetching: false
+					localWeather: [action.payload],
+					isFetching: false,
+				}
+			case WEATHER_IMAGE:
+				return {
+					...state,
+					image: [action.payload],
+					isFetching: false,
+				}
+			case WEATHER_INFO:
+				return {
+					...state,
+					localInfo: [action.payload],
+					isFetching: false,
 				}
 			case SET_ERROR:
 				return {
-          ...state,
-          isFetching: false,
+					...state,
+					isFetching: false,
 					error: action.payload,
 				}
 			default:
