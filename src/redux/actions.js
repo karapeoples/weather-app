@@ -2,12 +2,17 @@ import axios from 'axios'
 
 export const SET_ERROR = 'SET_ERROR'
 export const DYNAMIC_WEATHER = 'DYNAMIC_WEATHER'
+export const PREPARED_DATA = 'PREPARED_DATA'
 
+
+export const prepareData = () => dispatch => {
+  dispatch({ type: PREPARED_DATA });
+}
 
 export const getLocalWeather = (zip) => dispatch => {
-  axios.get(`http://api.weatherbit.io/v2.0/current?postal_code=${zip}&units=I&key=ff93c9c024664ab2b04d2eb8e5a16d0b`)
+  axios.get(`http://api.weatherapi.com/v1/current.json?key= 40b2b50c88aa4a44b9a10202202109&q=${zip}`)
     .then(res => {
-      dispatch({ type: DYNAMIC_WEATHER, payload: res.data.data[0]})
+      dispatch({ type: DYNAMIC_WEATHER, payload: res.data.current})
     })
     .catch(err => {
       console.log('No GO!!', err.message)

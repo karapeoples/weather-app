@@ -12,7 +12,7 @@ const Nav = () => {
     </div>
       <nav>
        <button><Link to='/'>Home</Link></button>
-       <button><Link to='/search'>Local Weather</Link></button>
+       <button><Link to='/forecast'>Local Weather</Link></button>
         </nav>
     </div>
   )

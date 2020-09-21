@@ -1,38 +1,63 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLocalWeather } from '../redux/actions'
+import { getLocalWeather, prepareData } from '../redux/actions'
 import WeatherCard from './WeatherCard'
-import {history} from '../'
+
+
 
 const WeatherList = () => {
+  const data = useSelector((state) => state.isFetching)
   const localWeather = useSelector(state => state.localWeather)
   const dispatch = useDispatch()
   const [zip, setZip] = useState('')
+  const [toggle, setToggle] = useState(false)
+  const [info, setInfo]=useState([])
 
-
-
-  const handleClick = e => {
-    e.preventDefault()
+useEffect(() => {
+    dispatch(prepareData())
     dispatch(getLocalWeather(zip))
-    history.push('/forecast')
+    setInfo(localWeather)
+// eslint-disable-next-line
+  },[dispatch])
+
+  const handleSubmit = (e)  => {
+    e.preventDefault()
+    setToggle(true)
+    /* dispatch(getLocalWeather(zip)) */
+
+
   }
   const handleChange = e => {
    setZip(e.target.value)
   }
 
 
-  return (
-    <div>
-      <form onSubmit={handleClick}>
-        <input type="text" value={zip} name='zip' placeholder='Find Your Weather by Zip Code' onChange={handleChange}/>
-        <button>Forecast Now</button>
-      </form>
 
-      <div>
-        {Object.keys(localWeather).map(local => {
-          return <WeatherCard rh={local.rh} />})}
-      </div>
-    </div>
+  return (
+    <section>
+      {toggle === false ?
+        <section>
+        <form>
+        <input type="text" value={zip} name='zip' placeholder='Find Your Weather by Zip Code' onChange={handleChange}/>
+        <button onClick={handleSubmit}>Forecast Now</button>
+          </form>
+        </section>
+      :
+      <section>
+        {data  ? <div> **The INFO is Coming** </div>
+            :
+          <section>
+            {info.map((local, index) => {
+              return
+              <WeatherCard key={index} temp={local.temp_f}/>
+          })
+              }
+            </section>
+      }
+
+        </section>
+      }
+    </section>
   )
 }
 

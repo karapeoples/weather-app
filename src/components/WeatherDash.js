@@ -1,12 +1,13 @@
 import React from 'react'
-import WeatherCard from './WeatherCard'
+import WeatherList from './WeatherList'
+
 
 
 const WeatherDash = () => {
 
   return (
-    <div>
-    <WeatherCard />
+    <div >
+      <WeatherList />
     </div>
   )
 }
