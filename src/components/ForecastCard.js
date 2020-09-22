@@ -14,8 +14,8 @@ const ForecastCard = ({forecast, localInfo}) => {
 							<h3>High: {info.day.maxtemp_f}</h3>
 							<h3>Low: {info.day.mintemp_f}</h3>
 							<h3>Average: {info.day.avgtemp_f}</h3>
-							<p>Chance of Rain: {info.day.daily_will_it_rain}%</p>
-							<p>Chance of Snow: {info.day.daily_will_it_snow}%</p>
+							<p>Chance of Rain: {info.day.daily_chance_of_rain}%</p>
+							<p>Chance of Snow: {info.day.daily_chance_of_snow}%</p>
 
 							<div>
 								<h4>Sunrise: {info.astro.sunrise}</h4>
