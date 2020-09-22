@@ -1,11 +1,12 @@
 import React from 'react'
+import {Row, Col} from 'reactstrap'
 
-const ForecastCard = ({forecast, localInfo}) => {
+const ForecastCard = ({forecast}) => {
   return (
-			<div >
+			<Row>
 				{forecast.map((info, index) => {
 					return (
-						<div key={index} className='weather-card'>
+            <Col sm='12' lg='3' key={index} className='weather-card'>
 							<h1>{info.date}</h1>
 							<div>
 								<img src={info.day.condition.icon} alt='nope' />
@@ -22,11 +23,11 @@ const ForecastCard = ({forecast, localInfo}) => {
 								<h4>Sunset: {info.astro.sunset}</h4>
 								<h4>MoonRise: {info.astro.moonrise}</h4>
 								<h4>MoonSet: {info.astro.moonset}</h4>
-							</div>
-						</div>
+                </div>
+						</Col>
 					)
 				})}
-			</div>
+			</Row>
 		)
 }
 

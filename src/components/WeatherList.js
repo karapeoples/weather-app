@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getLocalWeather, prepareData } from '../redux/actions'
 import WeatherCard from './WeatherCard'
 import ForecastCard from './ForecastCard'
+import{Progress} from 'reactstrap'
 
 
 
@@ -35,27 +36,35 @@ const WeatherList = () => {
 					<section>
 						<form>
 							<input type='text' value={zip} name='zip' placeholder='Find Your Weather by Zip Code' onChange={handleChange} />
-							<button onClick={handleSubmit}>Forecast Now</button>
+							<button onClick={handleSubmit}>Get Forecast Now</button>
 						</form>
 					</section>
 				) : (
 					<section>
 						{data ? (
-							<div> **The INFO is Coming** </div>
+							<div>
+								<Progress multi>
+									<Progress striped bar value='10' />
+									<Progress striped bar color='success' value='30' />
+									<Progress striped bar color='warning' value='20' />
+									<Progress striped bar color='danger' value='20' />
+								</Progress>
+							</div>
 						) : (
 							<section>
 								<br />
 								{localInfo.map((info, index) => {
 									return (
-										<div key={index}>
+										<div key={index} className='weather-card'>
 											<h1>
 												{info.name}, {info.region}
 											</h1>
 											<h5>{info.localtime}</h5>
+											<WeatherCard weather={weather} image={image} localInfo={localInfo} />
 										</div>
 									)
 								})}
-								<WeatherCard weather={weather} image={image} localInfo={localInfo} />
+
 								<br />
 								<ForecastCard forecast={forecast} localInfo={localInfo} />
 							</section>

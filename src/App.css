@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-header-top{
@@ -34,4 +35,14 @@
 .weather-image-frame{
   width: 75%;
   margin: 0 auto;
+}
+
+button{
+  color: #007BFE;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: 2% auto;
 }
